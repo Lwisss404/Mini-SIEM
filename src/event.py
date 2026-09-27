@@ -9,6 +9,7 @@ class EventType(Enum):
     LOGIN_FAILURE = "LOGIN_FAILURE"
     PROCESS_START = "PROCESS_START"
     PROCESS_STOP = "PROCESS_STOP"
+    SYSTEM_EVENT = "SYSTEM_EVENT"
 
 
 @dataclass
@@ -19,5 +20,6 @@ class Event:
     username: Optional[str] = None
     source_ip: Optional[str] = None
     process: Optional[str] = None
+    pid: Optional[int] = None
     message: Optional[str] = None
     

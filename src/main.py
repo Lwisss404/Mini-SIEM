@@ -1,21 +1,27 @@
 from datetime import datetime
-from event import Event, EventType
 
+from event import Event, EventType
+from parsers.macos import MacOSParser
+from collectors.macos import MacOSCollector
 
 
 def main():
     
-    event = Event (
-        timestamp = datetime.now(),
-        source = "MacOS",
-        event_type = EventType.LOGIN_SUCCESS,
-        username = "root",
-        source_ip = "192.82.56.101",
-        process = "sshd",
-        message = "Failed Password For Root"
-    )    
+    collector = MacOSCollector()
+    parser = MacOSParser()
     
-    print(event)
+    """for line in collector.collect_recent("5m"):
+        print(line)"""
+        
+    try:
+        for line in collector.stream():
+            event = parser.parse(line)
+            if event:
+                print("\n")
+                print(event)
+    
+    except KeyboardInterrupt:
+        print("\nStopping log stream...")
 
 
 
