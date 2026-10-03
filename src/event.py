@@ -22,4 +22,6 @@ class Event:
     process: Optional[str] = None
     pid: Optional[int] = None
     message: Optional[str] = None
+    event_id: Optional[int] = None
+    log_name: Optional[str] = None
     

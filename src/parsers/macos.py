@@ -20,9 +20,10 @@ class MacOSParser(LogParser):
         match = LOG_PATTERN.match(line)
 
         if not match : return None
-
+        
         timestamp = match.group("timestamp")
-        timestamp = timestamp[:-5] + timestamp[-5:-2] + ":" + timestamp[-2:]
+        if timestamp[-5] in "+-":
+            timestamp = (timestamp[:-2] + ":" + timestamp[-2:])
 
         return Event(
             timestamp = datetime.fromisoformat(timestamp),

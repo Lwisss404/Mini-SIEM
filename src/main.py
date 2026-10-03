@@ -1,3 +1,4 @@
+import platform
 from datetime import datetime
 
 from event import Event, EventType
@@ -6,6 +7,13 @@ from collectors.macos import MacOSCollector
 
 
 def main():
+    
+    system = platform.system()
+    
+    if system == "Darwin": print("Running On MacOS...")
+    elif system == "Linux": print("Running On Linux...")
+    elif system == "Windows": print("Running On Windows...")
+    else: print(f"Unsupported Operating System: {system}")
     
     collector = MacOSCollector()
     parser = MacOSParser()
