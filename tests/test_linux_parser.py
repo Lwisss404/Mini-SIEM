@@ -10,7 +10,7 @@ class TestLinuxParser(unittest.TestCase):
         self.parser = LinuxParser()
         
     def test_valid_logs(self):
-        with open("samples/linux/auth.log", "r") as file:
+        with open("logs/samples/linux/auth.log", "r") as file:
             lines = file.readlines()
             
         for line in lines:

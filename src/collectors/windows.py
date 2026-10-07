@@ -1,18 +1,15 @@
 import subprocess
 from typing import Iterator
 
-from base import LogCollector
+from collectors.base import LogCollector
 
 
 class WindowsCollector(LogCollector):
     
-    def __init__(self, log_names: list[str]):
-        self.log_names = log_names
-    
-    def collect_recent(self, duration: str) -> Iterator[str]:
+    def collect_recent(self, duration: str, log_names: list[str]) -> Iterator[str]:
         logs = " ,".join(
             f"'{log_name}'"
-            for log_name in self.log_names
+            for log_name in log_names
         )
         
         command = [
@@ -41,17 +38,17 @@ class WindowsCollector(LogCollector):
             process.terminate()
             process.wait()
             
-    def stream(self) -> Iterator[str]:
+    def stream(self, log_names: list[str]) -> Iterator[str]:
         logs = " ,".join(
             f"'{log_name}'"
-            for log_name in self.log_names
+            for log_name in log_names
         )
         
         command = [
             "powershell",
             "-command",
             (
-                f"$logs = @{self.log_names}; "
+                f"$logs = @{logs}; "
                 f"Register-WinEvent -LogName $logs -sSourceIdentifier 'MiniSIEM' | Our-Null; "
                 f"try {{ "
                 f"while ($true) {{ "

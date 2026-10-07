@@ -10,7 +10,7 @@ class TestMacOSParser(unittest.TestCase):
         self.parser = MacOSParser()
         
     def test_valid_logs(self):
-        with open("samples/macos/system.log", "r") as file:
+        with open("logs/samples/macos/system.log", "r") as file:
             lines = file.readlines()
             
         for line in lines:

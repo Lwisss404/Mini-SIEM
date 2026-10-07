@@ -11,7 +11,7 @@ class TestWindowsParser(unittest.TestCase):
         self.parser = WindowsParser()
         
     def test_valid_logs(self):
-        with open("samples/windows/security.log", "r") as file:
+        with open("logs/samples/windows/security.log", "r") as file:
             lines = file.readlines()
             
         for line in lines:
