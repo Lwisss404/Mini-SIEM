@@ -25,8 +25,14 @@ class Interfaces():
             print("1. Application")
             print("2. Security")
             print("3. System")
-            choice = int(input("Select Log Channel: "))
+            print("4. Continue")
+            choice = int(input("Select Log Channel / Continue: "))
             if choice == 1: list.append("Application")
             elif choice == 2: list.append("Security")
             elif choice == 3: list.append("System")
+            elif choice == 4:
+                if len(list) == 0:
+                    print("No Log Channel Selected Yet!")
+                else:
+                    return list
             else: print("Invalid Selection, Try Again!")
