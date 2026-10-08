@@ -29,7 +29,7 @@ class MacOSParser(LogParser):
         pid = int(match.group("pid")) if match.group("pid") else None
         message = match.group("message")
 
-        event_type = MacOSParser.identify_event_type(process, message)
+        event_type = MacOSParser.identify_event_type(process, message, 0)
 
         return Event(
             timestamp = datetime.fromisoformat(timestamp),
@@ -40,10 +40,11 @@ class MacOSParser(LogParser):
             message = message
         )
 
-    def identify_event_type(process: str, message: str) -> EventType:
+    def identify_event_type(process: str, message: str, event_id: int) -> EventType:
         
         message = message.lower()
         process = process.strip().lower()
+        event_id = event_id
         
         if process in {"sshd", "loginwindow", "securityd"}:
             if "accepted password" in message or "accepted publickey" in message or "authentication succeeded" in message:

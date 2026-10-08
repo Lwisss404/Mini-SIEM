@@ -57,8 +57,6 @@ class Storage():
         fingerprint.update(event.source.encode('utf-8'))
         if event.event_id != None: fingerprint.update(event.event_id.to_bytes(length=8, byteorder='big'))
         if event.log_name != None: fingerprint.update(event.log_name.encode('utf-8'))
-        """print(f"#DEBUG: {event.pid}")"""
-        """print(f"#DEBUG: {type(event.pid)}")"""
         if event.pid != None: fingerprint.update(event.pid.to_bytes(length=8, byteorder='big'))
         if event.message != None: fingerprint.update(event.message.encode('utf-8'))
         return fingerprint.hexdigest()

@@ -11,7 +11,7 @@ class LogParser(ABC):
         pass
     
     @abstractmethod
-    def identify_event_type(self, process: str, message: str) -> EventType:
+    def identify_event_type(process: str, message: str, event_id: int) -> EventType:
         """ Identify the event type according to the content of precific fields of event """
         pass
     
